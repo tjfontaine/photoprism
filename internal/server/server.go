@@ -10,6 +10,11 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/photoprism/photoprism/internal/config"
 	"github.com/photoprism/photoprism/internal/event"
+
+	docs "github.com/photoprism/photoprism/internal/docs"
+
+	swaggerfiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 var log = event.Log
@@ -67,6 +72,10 @@ func Start(ctx context.Context, conf *config.Config) {
 				conf.BaseUri(config.ApiUri + "/videos"),
 			})))
 	}
+
+	docs.SwaggerInfo.BasePath = conf.ApiUri()
+
+	router.GET(conf.ApiUri()+"/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	// Set template directory
 	router.LoadHTMLGlob(conf.TemplatesPath() + "/*")

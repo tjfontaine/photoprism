@@ -7,6 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/photoprism/photoprism/internal/acl"
+	"github.com/photoprism/photoprism/internal/config"
 	"github.com/photoprism/photoprism/internal/entity"
 	"github.com/photoprism/photoprism/internal/form"
 	"github.com/photoprism/photoprism/internal/i18n"
@@ -14,7 +15,20 @@ import (
 	"github.com/photoprism/photoprism/internal/session"
 )
 
+type SessionResponse struct {
+	APIResponse
+	SessionData  session.Data
+	ClientConfig config.ClientConfig
+}
+
 // POST /api/v1/session
+// @Summary create a session by logging in
+// @Produce json
+// @Accept json
+// @Param id body form.Login true "login form"
+// @Success 200 {object} SessionResponse
+// @Failure 400 {object} APIError
+// @Router /session [post]
 func CreateSession(router *gin.RouterGroup) {
 	router.POST("/session", func(c *gin.Context) {
 		var f form.Login
@@ -89,6 +103,12 @@ func CreateSession(router *gin.RouterGroup) {
 }
 
 // DELETE /api/v1/session/:id
+// @Summary Delete active session
+// @Accept json
+// @Produce json
+// @Param id path string true "session id"
+// @Success 200 {object} APIResponse
+// @Router /session/:id [delete]
 func DeleteSession(router *gin.RouterGroup) {
 	router.DELETE("/session/:id", func(c *gin.Context) {
 		id := clean.Token(c.Param("id"))

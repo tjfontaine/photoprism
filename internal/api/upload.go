@@ -16,6 +16,13 @@ import (
 )
 
 // POST /api/v1/upload/:path
+// @Summary upload a new image
+// @Produce json
+// @Accept multipart/form-data
+// @Param path path string true "path to file"
+// @Param files formData file true "list of files"
+// @Success 200 {object} i18n.Response
+// @Router /upload/:path [post]
 func Upload(router *gin.RouterGroup) {
 	router.POST("/upload/:path", func(c *gin.Context) {
 		conf := service.Config()

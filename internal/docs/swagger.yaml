@@ -1,0 +1,780 @@
+definitions:
+  api.APIError:
+    properties:
+      error:
+        type: string
+    type: object
+  api.APIResponse:
+    properties:
+      id:
+        type: string
+      status:
+        type: string
+    type: object
+  api.SessionResponse:
+    properties:
+      clientConfig:
+        $ref: '#/definitions/config.ClientConfig'
+      id:
+        type: string
+      sessionData:
+        $ref: '#/definitions/session.Data'
+      status:
+        type: string
+    type: object
+  config.CategoryLabel:
+    properties:
+      Name:
+        type: string
+      Slug:
+        type: string
+      UID:
+        type: string
+    type: object
+  config.ClientConfig:
+    properties:
+      albumCategories:
+        items:
+          type: string
+        type: array
+      albums:
+        items:
+          $ref: '#/definitions/entity.Album'
+        type: array
+      apiUri:
+        type: string
+      appIcon:
+        type: string
+      appMode:
+        type: string
+      appName:
+        type: string
+      baseUri:
+        type: string
+      cameras:
+        items:
+          $ref: '#/definitions/entity.Camera'
+        type: array
+      categories:
+        items:
+          $ref: '#/definitions/config.CategoryLabel'
+        type: array
+      clip:
+        type: integer
+      colors:
+        items:
+          additionalProperties:
+            type: string
+          type: object
+        type: array
+      contentUri:
+        type: string
+      copyright:
+        type: string
+      count:
+        $ref: '#/definitions/config.ClientCounts'
+      countries:
+        items:
+          $ref: '#/definitions/entity.Country'
+        type: array
+      cssUri:
+        type: string
+      debug:
+        type: boolean
+      demo:
+        type: boolean
+      disable:
+        $ref: '#/definitions/config.ClientDisable'
+      downloadToken:
+        type: string
+      edition:
+        type: string
+      experimental:
+        type: boolean
+      flags:
+        type: string
+      imprint:
+        type: string
+      imprintUrl:
+        type: string
+      jsUri:
+        type: string
+      lenses:
+        items:
+          $ref: '#/definitions/entity.Lens'
+        type: array
+      manifestUri:
+        type: string
+      mapKey:
+        type: string
+      mode:
+        type: string
+      name:
+        type: string
+      people:
+        items:
+          $ref: '#/definitions/entity.Person'
+        type: array
+      pos:
+        $ref: '#/definitions/config.ClientPosition'
+      previewToken:
+        type: string
+      public:
+        type: boolean
+      readonly:
+        type: boolean
+      server:
+        $ref: '#/definitions/env.Resources'
+      settings:
+        $ref: '#/definitions/config.Settings'
+      siteAuthor:
+        type: string
+      siteCaption:
+        type: string
+      siteDescription:
+        type: string
+      siteDomain:
+        type: string
+      sitePreview:
+        type: string
+      siteTitle:
+        type: string
+      siteUrl:
+        type: string
+      sponsor:
+        type: boolean
+      staticUri:
+        type: string
+      status:
+        type: string
+      test:
+        type: boolean
+      thumbs:
+        items:
+          $ref: '#/definitions/config.ThumbSize'
+        type: array
+      trace:
+        type: boolean
+      uploadNSFW:
+        type: boolean
+      version:
+        type: string
+      wallpaperUri:
+        type: string
+      years:
+        items:
+          type: integer
+        type: array
+    type: object
+  config.ClientCounts:
+    properties:
+      albums:
+        type: integer
+      all:
+        type: integer
+      cameras:
+        type: integer
+      countries:
+        type: integer
+      favorites:
+        type: integer
+      files:
+        type: integer
+      folders:
+        type: integer
+      hidden:
+        type: integer
+      labelMaxPhotos:
+        type: integer
+      labels:
+        type: integer
+      lenses:
+        type: integer
+      live:
+        type: integer
+      moments:
+        type: integer
+      months:
+        type: integer
+      people:
+        type: integer
+      photos:
+        type: integer
+      places:
+        type: integer
+      private:
+        type: integer
+      review:
+        type: integer
+      states:
+        type: integer
+      stories:
+        type: integer
+      videos:
+        type: integer
+    type: object
+  config.ClientDisable:
+    properties:
+      backups:
+        type: boolean
+      classification:
+        type: boolean
+      darktable:
+        type: boolean
+      exiftool:
+        type: boolean
+      faces:
+        type: boolean
+      ffmpeg:
+        type: boolean
+      heifconvert:
+        type: boolean
+      places:
+        type: boolean
+      raw:
+        type: boolean
+      rawtherapee:
+        type: boolean
+      settings:
+        type: boolean
+      sips:
+        type: boolean
+      tensorflow:
+        type: boolean
+      webdav:
+        type: boolean
+    type: object
+  config.ClientPosition:
+    properties:
+      cid:
+        type: string
+      lat:
+        type: number
+      lng:
+        type: number
+      uid:
+        type: string
+      utc:
+        type: string
+    type: object
+  config.DownloadSettings:
+    properties:
+      disabled:
+        type: boolean
+      mediaRaw:
+        type: boolean
+      mediaSidecar:
+        type: boolean
+      name:
+        type: string
+      originals:
+        type: boolean
+    type: object
+  config.FeatureSettings:
+    properties:
+      albums:
+        type: boolean
+      archive:
+        type: boolean
+      delete:
+        type: boolean
+      download:
+        type: boolean
+      edit:
+        type: boolean
+      estimates:
+        type: boolean
+      files:
+        type: boolean
+      folders:
+        type: boolean
+      import:
+        type: boolean
+      labels:
+        type: boolean
+      library:
+        type: boolean
+      logs:
+        type: boolean
+      moments:
+        type: boolean
+      people:
+        type: boolean
+      places:
+        type: boolean
+      private:
+        type: boolean
+      review:
+        type: boolean
+      share:
+        type: boolean
+      upload:
+        type: boolean
+      videos:
+        type: boolean
+    type: object
+  config.ImportSettings:
+    properties:
+      move:
+        type: boolean
+      path:
+        type: string
+    type: object
+  config.IndexSettings:
+    properties:
+      convert:
+        type: boolean
+      path:
+        type: string
+      rescan:
+        type: boolean
+      skipArchived:
+        type: boolean
+    type: object
+  config.MapsSettings:
+    properties:
+      animate:
+        type: integer
+      style:
+        type: string
+    type: object
+  config.SearchSettings:
+    properties:
+      batchSize:
+        type: integer
+    type: object
+  config.Settings:
+    properties:
+      download:
+        $ref: '#/definitions/config.DownloadSettings'
+      features:
+        $ref: '#/definitions/config.FeatureSettings'
+      import:
+        $ref: '#/definitions/config.ImportSettings'
+      index:
+        $ref: '#/definitions/config.IndexSettings'
+      maps:
+        $ref: '#/definitions/config.MapsSettings'
+      search:
+        $ref: '#/definitions/config.SearchSettings'
+      share:
+        $ref: '#/definitions/config.ShareSettings'
+      stack:
+        $ref: '#/definitions/config.StackSettings'
+      templates:
+        $ref: '#/definitions/config.TemplateSettings'
+      ui:
+        $ref: '#/definitions/config.UISettings'
+    type: object
+  config.ShareSettings:
+    properties:
+      title:
+        type: string
+    type: object
+  config.StackSettings:
+    properties:
+      meta:
+        type: boolean
+      name:
+        type: boolean
+      uuid:
+        type: boolean
+    type: object
+  config.TemplateSettings:
+    properties:
+      default:
+        type: string
+    type: object
+  config.ThumbSize:
+    properties:
+      h:
+        type: integer
+      size:
+        type: string
+      use:
+        type: string
+      w:
+        type: integer
+    type: object
+  config.UISettings:
+    properties:
+      language:
+        type: string
+      scrollbar:
+        type: boolean
+      theme:
+        type: string
+      zoom:
+        type: boolean
+    type: object
+  entity.Address:
+    properties:
+      CellID:
+        type: string
+      City:
+        type: string
+      Country:
+        type: string
+      CreatedAt:
+        type: string
+      DeletedAt:
+        type: string
+      ID:
+        type: integer
+      Lat:
+        type: number
+      Line1:
+        type: string
+      Line2:
+        type: string
+      Lng:
+        type: number
+      Notes:
+        type: string
+      Src:
+        type: string
+      State:
+        type: string
+      UpdatedAt:
+        type: string
+      Zip:
+        type: string
+    type: object
+  entity.Album:
+    properties:
+      Caption:
+        type: string
+      Category:
+        type: string
+      Country:
+        type: string
+      CreatedAt:
+        type: string
+      Day:
+        type: integer
+      DeletedAt:
+        type: string
+      Description:
+        type: string
+      Favorite:
+        type: boolean
+      Filter:
+        type: string
+      ID:
+        type: integer
+      Location:
+        type: string
+      Month:
+        type: integer
+      Notes:
+        type: string
+      Order:
+        type: string
+      ParentUID:
+        type: string
+      Path:
+        type: string
+      Private:
+        type: boolean
+      Slug:
+        type: string
+      State:
+        type: string
+      Template:
+        type: string
+      Thumb:
+        type: string
+      ThumbSrc:
+        type: string
+      Title:
+        type: string
+      Type:
+        type: string
+      UID:
+        type: string
+      UpdatedAt:
+        type: string
+      Year:
+        type: integer
+    type: object
+  entity.Camera:
+    properties:
+      Description:
+        type: string
+      ID:
+        type: integer
+      Make:
+        type: string
+      Model:
+        type: string
+      Name:
+        type: string
+      Notes:
+        type: string
+      Slug:
+        type: string
+      Type:
+        type: string
+    type: object
+  entity.Country:
+    properties:
+      Description:
+        type: string
+      ID:
+        type: string
+      Name:
+        type: string
+      Notes:
+        type: string
+      Slug:
+        type: string
+    type: object
+  entity.Lens:
+    properties:
+      Description:
+        type: string
+      ID:
+        type: integer
+      Make:
+        type: string
+      Model:
+        type: string
+      Name:
+        type: string
+      Notes:
+        type: string
+      Slug:
+        type: string
+      Type:
+        type: string
+    type: object
+  entity.Person:
+    properties:
+      Alias:
+        type: string
+      Favorite:
+        type: boolean
+      Hidden:
+        type: boolean
+      Name:
+        type: string
+      UID:
+        type: string
+    type: object
+  entity.User:
+    properties:
+      Address:
+        $ref: '#/definitions/entity.Address'
+      ArtistName:
+        type: string
+      BackupEmail:
+        type: string
+      BirthDay:
+        type: integer
+      BirthMonth:
+        type: integer
+      BirthYear:
+        type: integer
+      BusinessEmail:
+        type: string
+      BusinessPhone:
+        type: string
+      BusinessURL:
+        type: string
+      CanInvite:
+        type: boolean
+      CompanyName:
+        type: string
+      CreatedAt:
+        type: string
+      DeletedAt:
+        type: string
+      DepartmentName:
+        type: string
+      EmailConfirmed:
+        type: boolean
+      FatherUID:
+        type: string
+      FullName:
+        type: string
+      GlobalUID:
+        type: string
+      IsArtist:
+        type: boolean
+      IsSubject:
+        type: boolean
+      JobTitle:
+        type: string
+      MaidenName:
+        type: string
+      MotherUID:
+        type: string
+      NickName:
+        type: string
+      PersonAvatar:
+        type: string
+      PersonBio:
+        type: string
+      PersonLocation:
+        type: string
+      PersonPhone:
+        type: string
+      PersonStatus:
+        type: string
+      PersonURL:
+        type: string
+      PrimaryEmail:
+        type: string
+      RoleAdmin:
+        type: boolean
+      RoleChild:
+        type: boolean
+      RoleFamily:
+        type: boolean
+      RoleFriend:
+        type: boolean
+      RoleGuest:
+        type: boolean
+      StoragePath:
+        type: string
+      TermsAccepted:
+        type: boolean
+      UID:
+        type: string
+      UpdatedAt:
+        type: string
+      UserDisabled:
+        type: boolean
+      UserName:
+        type: string
+      UserStatus:
+        type: string
+      WebDAV:
+        type: boolean
+    type: object
+  env.Resources:
+    properties:
+      cores:
+        type: integer
+      memory:
+        properties:
+          free:
+            type: integer
+          info:
+            type: string
+          reserved:
+            type: integer
+          total:
+            type: integer
+          used:
+            type: integer
+        type: object
+      routines:
+        type: integer
+    type: object
+  form.Login:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      token:
+        type: string
+      username:
+        type: string
+    type: object
+  i18n.Response:
+    properties:
+      code:
+        type: integer
+      details:
+        type: string
+      error:
+        type: string
+      message:
+        type: string
+    type: object
+  session.Data:
+    properties:
+      shares:
+        description: Slice of shared entity UIDs.
+        items:
+          type: string
+        type: array
+      tokens:
+        description: Slice of secret share tokens.
+        items:
+          type: string
+        type: array
+      user:
+        $ref: '#/definitions/entity.User'
+        description: Session user, guest or anonymous person.
+    type: object
+info:
+  contact: {}
+paths:
+  /session:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: login form
+        in: body
+        name: id
+        required: true
+        schema:
+          $ref: '#/definitions/form.Login'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.SessionResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api.APIError'
+      summary: create a session by logging in
+  /session/:id:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: session id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.APIResponse'
+      summary: Delete active session
+  /upload/:path:
+    post:
+      consumes:
+      - multipart/form-data
+      parameters:
+      - description: path to file
+        in: path
+        name: path
+        required: true
+        type: string
+      - description: list of files
+        in: formData
+        name: files
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/i18n.Response'
+      summary: upload a new image
+swagger: "2.0"

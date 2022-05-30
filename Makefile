@@ -145,6 +145,7 @@ generate:
 	@if [ ${$(shell git diff --shortstat assets/locales/messages.pot):1:45} == $(POT_UNCHANGED) ]; then\
 		git checkout -- assets/locales/messages.pot;\
 	fi
+	swag init -g ./internal/api/api.go -o ./internal/docs
 clean-local-assets:
 	rm -rf $(BUILD_PATH)/assets/*
 clean-local-cache:

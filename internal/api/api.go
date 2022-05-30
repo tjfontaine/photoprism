@@ -37,6 +37,15 @@ import (
 	"github.com/photoprism/photoprism/pkg/clean"
 )
 
+type APIResponse struct {
+	Status string `json:"status"`
+	Id     string `json:"id"`
+}
+
+type APIError struct {
+	ErrorMessage string `json:"error"`
+}
+
 var log = event.Log
 
 func logError(prefix string, err error) {
